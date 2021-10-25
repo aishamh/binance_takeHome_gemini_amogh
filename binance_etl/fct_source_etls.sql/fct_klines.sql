@@ -3,6 +3,9 @@ CREATE TABLE IF NOT EXISTS binance_dw.fct_candles1m
 	  ticker_key INTEGER NOT NULL 
 	, date_key INTEGER NOT NULL 
 	, time_key INTEGER NOT NULL 
+	, status_key INTEGER NOT NULL  
+	, 52week_high INTEGER NOT NULL  
+	, 52week_low INTEGER NOT NULL 
 	, high decimal(8,2)
 	, low decimal(8,2)
 	, close decimal(8,2)
