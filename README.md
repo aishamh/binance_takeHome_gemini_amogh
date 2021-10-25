@@ -108,3 +108,33 @@ The fact table definitions are here: https://github.com/amogh147/binance_takeHom
 
 The definitions of the tables are same as mentioned above.
 
+Answers to some questions:
+1. List all the components involved in ETL strategy, refresh type, refresh frequency,
+tools/technologies, etc - Airflow , redshift , refreshed on an hourly basis. refresh type: Upsert (update and insert)
+
+2. Define the strategy for streaming data and batch data coming in from this source for
+historical and near-real time analysis - Same as above, for streaming I would use kinesis firehose send the streams to sqs and store the data in data lake using lambda.
+
+3. Sample model/schema with Facts and Dimensions to help answer below sample
+questions - same as in the above section. 
+
+4. All the assumptions are detailed in the code comment section. 
+
+-------------------------------------------
+How are these star schemas updated:
+-------------------------------------------
+Again I would use airflow with Pg8kOperator (raw code below) and update all the facts and dimensions and warp it around an airflow dag.
+
+Operator pseudo code:
+try:
+            pg_hook = Pg8kHook(cluster_to_monitor)
+            pg_conn = pg_hook.get_conn()
+        except Exception as e:
+            raise Exception('Database connection error:' + str(e))
+        pg_conn.autocommit = False
+        pg_cursor = pg_conn.cursor()
+        try:
+            pg_cursor.execute(kwargs['templates_dict']['sql'])
+        except Exception as e:
+            raise Exception("Query execution failed: " + str(e))
+        query_output = pg_cursor.fetchall()
