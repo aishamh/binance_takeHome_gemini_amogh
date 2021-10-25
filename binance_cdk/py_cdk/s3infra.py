@@ -25,10 +25,10 @@ class s3Infra(cdk.Stack):
 	    candlesRaw = s3deploy.BucketDeployment(self, "binanceInputFeedsRaw/candles-raw", sources=[s3deploy.Source.asset("")], destination_bucket=self.bucket, destination_key_prefix="binanceInputFeedsRaw/candles-raw")
 	    ordersRaw = s3deploy.BucketDeployment(self, "binanceInputFeedsRaw/orders-raw", sources=[s3deploy.Source.asset("")], destination_bucket=self.bucket, destination_key_prefix="binanceInputFeedsRaw/orders-raw")
 	    #Creates an cooked prefix, where the json is flatted out and store in data lake partitioned by year-month-day and hour. in the binance-candle-input-1mGrain bucket. This is the dest. from the output of lambda function
-	    s3deploy.BucketDeployment(self, "binanceCookedDataLake", sources = [s3deploy.Source.asset("")], destination_bucket = self.bucket, destination_key_prefix = "binance-cooked-DataLake")
+	    s3deploy.BucketDeployment(self, "binanceCookedDataLake", sources = [s3deploy.Source.asset("")], destination_bucket = self.bucket, destination_key_prefix = "binance-cooked-DataLake-candles")
 
 	    #Creates an curated prefix, where the json is flatted out and store in data lake partitioned by year-month-day and hour. in the binance-candle-input-1mGrain bucket. This is the dest. from the output of glue etl (Spark job) function
-	    s3deploy.BucketDeployment(self, "binanceCuratedDataLake", sources = [s3deploy.Source.asset("")], destination_bucket = self.bucket, destination_key_prefix = "binance-curatedDataLake")
+	    s3deploy.BucketDeployment(self, "binanceCuratedDataLake", sources = [s3deploy.Source.asset("")], destination_bucket = self.bucket, destination_key_prefix = "binance-curatedDataLake-orders")
 
 	    #Folder to holder all the glue scripts that is read by the glue job
 	    s3deploy.BucketDeployment(self, "binancglueETL",sources = [s3deploy.Source.asset("py_cdk/glueETLScripts/accountOrders.py")], destination_bucket = self.bucket, destination_key_prefix = "binance-glueETL")
