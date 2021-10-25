@@ -1,68 +1,33 @@
+ETL Design to get data from binance api (https://python-binance.readthedocs.io/en/latest/binance.html)
+--------------------
+Problem Statement: 
+--------------------
+Write a script (python/similar) to export data from https://www.binance.com/ for the trading pairs
+BTC-USD.
+1. With 1 minute candles grain and store it into the assumed Data Lake. Refer Binance API
+clients for this task.
+Required columns in the output are:
+● Trading Pair,Open Price,Close Price,High Price,Low Price,BTC Volume,USD
+Volume,Number of Trades,Candle Open Time,Candle Close Time
 
-# Welcome to your CDK Python project!
+2. Get Account orders for the same trading pair for a sample size (500 to 1000 limit OR for
+a 15 minute period, as the volume will be high).
+Required columns in the output are:
+● Symbol, OrderID, Price, OrigQty, ExecutedQty, status, type, side
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`py_cdk_stack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+---------------
+Design Process:
+---------------
+ - For the designing such ETL(s) in either bath (1 hour intervals cadence in my current design) or near real time (a bit delay) , I have choosen my tech stack as AWS (Amazon web services). The ETL flow can be depicted in the following arch. design.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-This project is set up like a standard Python project.  The initialization process also creates
-a virtualenv within this project, stored under the .venv directory.  To create the virtualenv
-it assumes that there is a `python3` executable in your path with access to the `venv` package.
-If for any reason the automatic creation of the virtualenv fails, you can create the virtualenv
-manually once the init process completes.
+![image](https://user-images.githubusercontent.com/11287901/138631485-47a07cef-237c-4585-a721-2c7a798eeea9.png)
 
-To manually create a virtualenv on MacOS and Linux:
 
-```
-$ python3 -m venv .venv
-```
+![image](https://user-images.githubusercontent.com/11287901/138631515-e22a5a3a-9541-4594-9ab9-7878df4d9c0c.png)
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+Notes from the above architecture:
+1. All the above mentioned aws services/resources are deployed using CDK (Cloud development kit - https://aws.amazon.com/blogs/developer/getting-started-with-the-aws-cloud-development-kit-and-python/) via code commit and code pipeline i.e. the developer can commit the code to git and the pipeline build the artifacts and deploys the cloudformation changeset (internaly converts to .yml config file) into the beta and prod aws accounts. In a nutshell the workflow would look like:
+ ![image](https://user-images.githubusercontent.com/11287901/138632517-6711e5a1-bdfe-45a9-b84d-35176b03a591.png)
 
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-You can now begin exploring the source code, contained in the hello directory.
-There is also a very trivial test included that can be run like this:
-
-```
-$ pytest
-```
-
-To add additional dependencies, for example other CDK libraries, just add to
-your requirements.txt file and rerun the `pip install -r requirements.txt`
-command.
-
-## Tutorial  
-See [this useful workshop](https://cdkworkshop.com/30-python.html) on working with the AWS CDK for Python projects.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+2. Lam
