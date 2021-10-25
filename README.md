@@ -21,7 +21,7 @@ Design Process:
  - For the designing such ETL(s) in either bath (1 hour intervals cadence in my current design) or near real time (a bit delay) , I have choosen my tech stack as AWS (Amazon web services). The ETL flow can be depicted in the following arch. design.
 
 
-![image](https://user-images.githubusercontent.com/11287901/138631485-47a07cef-237c-4585-a721-2c7a798eeea9.png)
+![image](https://user-images.githubusercontent.com/11287901/138637271-6f5e16d6-b307-4b52-a4de-0474ec49eb5d.png)
 
 
 Notes from the above architecture:
