@@ -82,3 +82,29 @@ But ideally the way I would setup in the prod environment as follows (depicted i
 
 ![image](https://user-images.githubusercontent.com/11287901/138636775-51ef53c6-829e-4f3d-8a29-77530be420bd.png)
 
+
+--------------------------------
+Problem statement 2. ETL Design
+--------------------------------
+Based on the raw data extracted from the previous section, come up with the ETL design to
+ingest and maintain this data in the Data Lake and the DWH. Design a sample schema based
+on this data to facilitate any analysis and answer the sample queries mentioned below.
+
+
+-----------------
+Design Process:
+----------------
+To help answer some of the questions listed above, I have constructed a star schema in reshift using the raw tables extracted from the problem statement 1. Below is the schema.
+
+1. The star schema for accountOrders is as follows:
+![image](https://user-images.githubusercontent.com/11287901/138753541-dc56481f-e6c5-4607-8eba-baa45b2d3760.png)
+
+The specturm table definitions for the raw tables are here: https://github.com/amogh147/binance_takeHome_gemini_amogh/tree/main/binance_etl/object_defs
+The dim table definitions are here: https://github.com/amogh147/binance_takeHome_gemini_amogh/tree/main/binance_etl/dim_source_etls
+The fact table definitions are here: https://github.com/amogh147/binance_takeHome_gemini_amogh/tree/main/binance_etl/fct_source_etls.sql
+
+2. The star schema for klines (Candles at 1m grain is here) is as shown below:
+![image](https://user-images.githubusercontent.com/11287901/138754480-9b5027e7-55f2-4d22-97ef-8c50975359dc.png)
+
+The definitions of the tables are same as mentioned above.
+
