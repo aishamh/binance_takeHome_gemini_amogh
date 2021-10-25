@@ -5,8 +5,6 @@ CREATE TABLE IF NOT EXISTS binance_dw.fct_Accountorders
 	, ticker_key INTEGER NOT NULL 
 	, status_key INTEGER NOT NULL 
 	, type_key INTEGER NOT NULL 
-	, date_key INTEGER NOT NULL
-	, time_key INTEGER NOT NULL
 	, side_key INTEGER NOT NULL 
 	, price NUMERIC(8,2)  ENCODE delta32k
 	, origQty NUMERIC(8,2)  ENCODE delta32k
