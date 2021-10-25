@@ -138,3 +138,16 @@ try:
         except Exception as e:
             raise Exception("Query execution failed: " + str(e))
         query_output = pg_cursor.fetchall()
+
+--------------------
+Analytical Queries
+--------------------
+1. What is the 52 week high and low for all the items sold in the past 3 months?
+Code here: https://github.com/amogh147/binance_takeHome_gemini_amogh/blob/main/binance_etl/Analytics_queries/52WeekHigh.sql
+2. What is the high/low price/volume in the past 2 hours?
+ Code here: https://github.com/amogh147/binance_takeHome_gemini_amogh/blob/main/binance_etl/Analytics_queries/highLwPriceVolume.sql
+3. What is the volume for a given timeframe?
+Code here: https://github.com/amogh147/binance_takeHome_gemini_amogh/blob/main/binance_etl/Analytics_queries/volume_timeFrame.sql
+4. Monthly, quarterly and yearly volume for items that have 10 million+ in volume over the
+past year?
+Code here: https://github.com/amogh147/binance_takeHome_gemini_amogh/blob/main/binance_etl/Analytics_queries/monthly_quarterly_sales.sql
