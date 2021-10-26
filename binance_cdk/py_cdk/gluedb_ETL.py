@@ -16,7 +16,7 @@ class glueDB(cdk.Stack):
 	    #Redshift role to copy data from data lake to the clusters
 	    binanceS3AccessForRedshiftClusterRole = iam.Role(self, 'binanceS3AccessForRedshiftClusterRole', {
 	    roleName = 'binanceS3AccessForRedshiftClusterRole',
-	    assumedBy = new iam.AccountPrincipal('123456'), #dummy aws account number, prefer to not give the exact account number for security reasons.
+	    assumedBy = iam.AccountPrincipal('123456'), #dummy aws account number, prefer to not give the exact account number for security reasons.
             managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess")]
 	    )                              
 	    #Glue crawler
